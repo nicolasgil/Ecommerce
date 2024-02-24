@@ -1,4 +1,4 @@
-package com.nicolas.ecommerce
+package com.nicolas.ecommerce.ui
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
