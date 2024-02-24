@@ -1,0 +1,44 @@
+package com.nicolas.ecommerce.ui.screens
+
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.wrapContentSize
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
+import com.nicolas.ecommerce.R
+import com.nicolas.ecommerce.ui.navigation.AppScreen
+import kotlinx.coroutines.delay
+
+
+@Composable
+fun SplashScreen(navController: NavHostController) {
+    Splash()
+    LaunchedEffect(key1 = true) {
+        delay(5000)
+        navController.popBackStack()
+        navController.navigate(AppScreen.LobbyScreen.route)
+
+    }
+}
+
+@Composable
+fun Splash() {
+    Image(
+        painter = painterResource(id = R.drawable.ic_splash),
+        contentDescription = "Splash",
+        modifier = Modifier
+            .fillMaxSize()
+            .wrapContentSize(Alignment.Center)
+    )
+}
+
+@Preview(showBackground = true)
+@Composable
+fun SplashPreview() {
+    Splash()
+}
