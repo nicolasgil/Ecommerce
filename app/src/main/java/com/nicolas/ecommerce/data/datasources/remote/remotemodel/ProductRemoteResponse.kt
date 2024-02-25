@@ -1,9 +1,15 @@
-package com.nicolas.ecommerce.domain
+package com.nicolas.ecommerce.data.datasources.remote.remotemodel
 
-import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 
-data class Product(
+data class ProductRemoteResponse(
+    @SerializedName("products") val products: List<ProductRemoteData>,
+    @SerializedName("total") val total: Int,
+    @SerializedName("skip") val skip: Int,
+    @SerializedName("limit") val limit: Int
+)
+
+data class ProductRemoteData(
     @SerializedName("id") val id: Int,
     @SerializedName("title") val title: String,
     @SerializedName("description") val description: String,
@@ -16,7 +22,3 @@ data class Product(
     @SerializedName("thumbnail") val thumbnail: String,
     @SerializedName("images") val images: List<String>
 )
-
-fun String.toProduct(): Product {
-    return Gson().fromJson(this, Product::class.java)
-}

@@ -15,6 +15,7 @@ buildscript {
         classpath("com.android.tools.build:gradle:4.1.3")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:1.3.72")
         classpath("com.google.dagger:hilt-android-gradle-plugin:2.48")
+        classpath("androidx.room:room-compiler:2.6.1")
     }
 }
 

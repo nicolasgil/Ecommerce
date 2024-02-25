@@ -9,8 +9,8 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nicolas.ecommerce.R
-import com.nicolas.ecommerce.domain.Product
-import com.nicolas.ecommerce.domain.toProduct
+import com.nicolas.ecommerce.domain.models.Product
+import com.nicolas.ecommerce.ui.screens.commons.toProduct
 
 @Composable
 fun ProductsColumn(products: List<Product>) {

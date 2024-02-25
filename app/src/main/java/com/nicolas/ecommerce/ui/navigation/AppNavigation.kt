@@ -1,11 +1,13 @@
 package com.nicolas.ecommerce.ui.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.nicolas.ecommerce.ui.screens.LobbyScreen
 import com.nicolas.ecommerce.ui.screens.SplashScreen
+import com.nicolas.ecommerce.ui.viewmodels.LobbyViewModel
 
 @Composable
 fun AppNavigation() {
@@ -17,7 +19,8 @@ fun AppNavigation() {
             SplashScreen(navController)
         }
         composable(AppScreen.LobbyScreen.route) {
-            LobbyScreen()
+            val viewModel = hiltViewModel<LobbyViewModel>()
+            LobbyScreen(viewModel)
         }
     }
 }
