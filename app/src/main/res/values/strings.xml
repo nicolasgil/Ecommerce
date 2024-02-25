@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Ecommerce</string>
+
+    //Lobby
+    <string name="lobby_text_title">Home</string>
+
+    //SearchBar
+    <string name="searchbar_text_placeholder">Buscar</string>
+
+    //ProductCard
+    <string name="productcard_text_description">Product</string>
+    <string name="splash_text_description">Splash</string>
 </resources>

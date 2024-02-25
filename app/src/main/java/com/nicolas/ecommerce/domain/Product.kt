@@ -1,5 +1,6 @@
 package com.nicolas.ecommerce.domain
 
+import com.google.gson.Gson
 import com.google.gson.annotations.SerializedName
 
 data class Product(
@@ -15,3 +16,7 @@ data class Product(
     @SerializedName("thumbnail") val thumbnail: String,
     @SerializedName("images") val images: List<String>
 )
+
+fun String.toProduct(): Product {
+    return Gson().fromJson(this, Product::class.java)
+}

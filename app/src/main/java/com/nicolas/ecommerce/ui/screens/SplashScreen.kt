@@ -8,6 +8,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
 import com.nicolas.ecommerce.R
@@ -30,7 +31,7 @@ fun SplashScreen(navController: NavHostController) {
 fun Splash() {
     Image(
         painter = painterResource(id = R.drawable.ic_splash),
-        contentDescription = "Splash",
+        contentDescription = stringResource(R.string.splash_text_description),
         modifier = Modifier
             .fillMaxSize()
             .wrapContentSize(Alignment.Center)

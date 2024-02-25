@@ -3,6 +3,7 @@ package com.nicolas.ecommerce.ui.screens
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -16,8 +17,12 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
-import com.nicolas.ecommerce.domain.Product
+import com.nicolas.ecommerce.R
+import com.nicolas.ecommerce.domain.toProduct
 import com.nicolas.ecommerce.ui.screens.commons.categories
 import com.nicolas.ecommerce.ui.theme.EcommerceTheme
 
@@ -38,45 +43,10 @@ fun LobbyScreen() {
 fun App() {
     var searchText by remember { mutableStateOf("") }
 
+    val jsonString = LocalContext.current.resources.openRawResource(R.raw.mock_product)
+        .bufferedReader().use { it.readText() }
     val products = remember {
-        listOf(
-            Product(
-                1, "iPhone 9",
-                "An apple mobile which is nothing like apple, An apple mobile which is nothing like apple, An apple mobile which is nothing like apple",
-                549.0,
-                12.96,
-                4.69,
-                94,
-                "Apple",
-                "smartphones",
-                "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
-                arrayListOf(
-                    "https://cdn.dummyjson.com/product-images/1/1.jpg",
-                    "https://cdn.dummyjson.com/product-images/1/2.jpg",
-                    "https://cdn.dummyjson.com/product-images/1/3.jpg",
-                    "https://cdn.dummyjson.com/product-images/1/4.jpg",
-                    "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg"
-                )
-            ),
-            Product(
-                2, "iPhone 9",
-                "An apple mobile which is nothing like apple, An apple mobile which is nothing like apple, An apple mobile which is nothing like apple",
-                549.0,
-                12.96,
-                4.69,
-                94,
-                "Apple",
-                "smartphones",
-                "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
-                arrayListOf(
-                    "https://cdn.dummyjson.com/product-images/1/1.jpg",
-                    "https://cdn.dummyjson.com/product-images/1/2.jpg",
-                    "https://cdn.dummyjson.com/product-images/1/3.jpg",
-                    "https://cdn.dummyjson.com/product-images/1/4.jpg",
-                    "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg"
-                )
-            )
-        )
+        listOf(jsonString.toProduct())
     }
 
     val selectedCategory by remember { mutableStateOf(categories[0]) }
@@ -84,7 +54,14 @@ fun App() {
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Home") }
+                title = {
+                    Text(
+                        text = stringResource(R.string.lobby_text_title),
+                        modifier = Modifier
+                            .fillMaxWidth(),
+                        textAlign = TextAlign.Center
+                    )
+                }
             )
         },
         content = { padding ->

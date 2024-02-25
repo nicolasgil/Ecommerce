@@ -1,6 +1,6 @@
 package com.nicolas.ecommerce.ui.screens
 
-import android.R
+import com.nicolas.ecommerce.R
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -15,10 +15,13 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nicolas.ecommerce.domain.Product
+import com.nicolas.ecommerce.domain.toProduct
 import com.nicolas.ecommerce.ui.screens.commons.LoadImageFromUrl
 
 @Composable
@@ -34,8 +37,8 @@ fun ProductCard(product: Product) {
         ) {
             LoadImageFromUrl(
                 imageUrl = product.thumbnail,
-                description = "Product",
-                R.drawable.arrow_down_float,
+                description = stringResource(R.string.productcard_text_description),
+                R.drawable.ic_placeholder_image,
                 500.dp, 150.dp
             )
             Text(
@@ -81,24 +84,9 @@ fun Rating(rating: Double) {
 @Preview(showBackground = true)
 @Composable
 fun ProductCardPreview() {
-    val sampleProduct = Product(
-        1, "iPhone 9",
-        "An apple mobile which is nothing like apple, An apple mobile which is nothing like apple, An apple mobile which is nothing like apple",
-        549.0,
-        12.96,
-        4.69,
-        94,
-        "Apple",
-        "smartphones",
-        "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg",
-        arrayListOf(
-            "https://cdn.dummyjson.com/product-images/1/1.jpg",
-            "https://cdn.dummyjson.com/product-images/1/2.jpg",
-            "https://cdn.dummyjson.com/product-images/1/3.jpg",
-            "https://cdn.dummyjson.com/product-images/1/4.jpg",
-            "https://cdn.dummyjson.com/product-images/1/thumbnail.jpg"
-        )
-    )
+    val jsonString = LocalContext.current.resources.openRawResource(R.raw.mock_product)
+        .bufferedReader().use { it.readText() }
 
-    ProductCard(product = sampleProduct)
+    val sampleProducts = jsonString.toProduct()
+    ProductCard(product = sampleProducts)
 }

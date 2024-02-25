@@ -12,8 +12,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.nicolas.ecommerce.R
 
 @Composable
 fun SearchBar(searchText: String, onSearchTextChange: (String) -> Unit) {
@@ -25,14 +27,14 @@ fun SearchBar(searchText: String, onSearchTextChange: (String) -> Unit) {
         OutlinedTextField(
             value = searchText,
             onValueChange = { onSearchTextChange(it) },
-            placeholder = { Text("Buscar") },
+            placeholder = { Text(stringResource(R.string.searchbar_text_placeholder)) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp)
         )
         Icon(
             Icons.Default.Search,
-            contentDescription = "Search",
+            contentDescription = stringResource(R.string.searchbar_text_placeholder),
             modifier = Modifier
                 .size(54.dp)
                 .padding(end = 15.dp)
@@ -44,5 +46,7 @@ fun SearchBar(searchText: String, onSearchTextChange: (String) -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun SearchBarPreview() {
-    SearchBar(searchText = "Buscar", onSearchTextChange = {})
+    SearchBar(
+        searchText = stringResource(R.string.searchbar_text_placeholder),
+        onSearchTextChange = {})
 }
