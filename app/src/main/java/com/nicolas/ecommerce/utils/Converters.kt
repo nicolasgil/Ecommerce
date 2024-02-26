@@ -1,4 +1,4 @@
-package com.nicolas.ecommerce.data.datasources.commons.funtions
+package com.nicolas.ecommerce.utils
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson

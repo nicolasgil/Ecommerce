@@ -6,12 +6,17 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class ProductRemoteRemoteDataSourceImpl @Inject constructor(
+class RemoteRemoteDataSourceImpl @Inject constructor(
     private val productService: ProductService,
-) : ProductRemoteDataSource {
-    override suspend fun getAllProducts(): List<Product> = withContext(Dispatchers.IO) {
+) : RemoteDataSource {
+    override suspend fun getAllProducts(): List<Product>  {
         val response = productService.getProducts().body()
-        return@withContext response?.products?.toDomainModel() ?: emptyList()
+        return response?.products?.toDomainModel() ?: emptyList()
+    }
+
+    override suspend fun getCategories(): List<String> {
+        val response = productService.getCategories().body()
+        return response?: emptyList()
     }
 
     private fun List<ProductRemoteData>.toDomainModel(): List<Product> =

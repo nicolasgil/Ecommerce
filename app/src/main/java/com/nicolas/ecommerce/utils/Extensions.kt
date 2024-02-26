@@ -1,4 +1,4 @@
-package com.nicolas.ecommerce.ui.screens.commons
+package com.nicolas.ecommerce.utils
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.size
@@ -34,3 +34,6 @@ fun LoadImageFromUrl(
         alignment = Alignment.Center
     )
 }
+
+fun List<Product>.sortByRatingDescThenById(): List<Product> =
+    sortedWith(compareByDescending<Product> { it.rating }.thenBy { it.id })

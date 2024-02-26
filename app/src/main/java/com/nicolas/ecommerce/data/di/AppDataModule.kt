@@ -1,9 +1,9 @@
 package com.nicolas.ecommerce.data.di
 
-import com.nicolas.ecommerce.data.datasources.local.ProductLocalDataSource
-import com.nicolas.ecommerce.data.datasources.local.ProductLocalDataSourceImpl
-import com.nicolas.ecommerce.data.datasources.remote.ProductRemoteDataSource
-import com.nicolas.ecommerce.data.datasources.remote.ProductRemoteRemoteDataSourceImpl
+import com.nicolas.ecommerce.data.datasources.local.LocalDataSource
+import com.nicolas.ecommerce.data.datasources.local.LocalDataSourceImpl
+import com.nicolas.ecommerce.data.datasources.remote.RemoteDataSource
+import com.nicolas.ecommerce.data.datasources.remote.RemoteRemoteDataSourceImpl
 import com.nicolas.ecommerce.data.repositories.ProductRepository
 import com.nicolas.ecommerce.data.repositories.ProductRepositoryImpl
 import dagger.Binds
@@ -16,11 +16,12 @@ import dagger.hilt.components.SingletonComponent
 abstract class AppDataModule {
 
     @Binds
-    abstract fun bindProductRemoteDataSource(productRemoteDataSourceImpl: ProductRemoteRemoteDataSourceImpl): ProductRemoteDataSource
+    abstract fun bindProductRemoteDataSource(productRemoteDataSourceImpl: RemoteRemoteDataSourceImpl): RemoteDataSource
 
     @Binds
-    abstract fun bindProductLocalDataSource(productLocalDataSourceImpl: ProductLocalDataSourceImpl): ProductLocalDataSource
+    abstract fun bindProductLocalDataSource(productLocalDataSourceImpl: LocalDataSourceImpl): LocalDataSource
 
     @Binds
     abstract fun bindProductRepository(productRepositoryImpl: ProductRepositoryImpl): ProductRepository
+
 }

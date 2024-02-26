@@ -19,3 +19,11 @@ data class ProductLocal(
     @ColumnInfo(name = "thumbnail") val thumbnail: String,
     @ColumnInfo(name = "images") val images: List<String>
 )
+
+
+@Entity
+data class CategoriesLocal(
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id") val id: Int = 0,
+    @ColumnInfo(name = "categories") val categories: List<String>
+)

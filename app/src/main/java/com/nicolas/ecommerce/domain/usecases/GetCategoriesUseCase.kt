@@ -5,11 +5,11 @@ import com.nicolas.ecommerce.domain.models.Product
 import com.nicolas.ecommerce.utils.sortByRatingDescThenById
 import javax.inject.Inject
 
-class GetProductsUseCase @Inject constructor(
+class GetCategoriesUseCase@Inject constructor(
     private val productRepository: ProductRepository
 
 ) {
-    suspend operator fun invoke(): List<Product> {
-        return productRepository.getAllProducts().sortByRatingDescThenById()
+    suspend operator fun invoke(): List<String> {
+        return productRepository.getCategories()
     }
 }

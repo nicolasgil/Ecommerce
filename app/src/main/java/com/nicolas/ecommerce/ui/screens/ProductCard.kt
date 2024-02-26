@@ -21,8 +21,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nicolas.ecommerce.R
 import com.nicolas.ecommerce.domain.models.Product
-import com.nicolas.ecommerce.ui.screens.commons.LoadImageFromUrl
-import com.nicolas.ecommerce.ui.screens.commons.toProduct
+import com.nicolas.ecommerce.utils.LoadImageFromUrl
+import com.nicolas.ecommerce.utils.toProduct
 
 @Composable
 fun ProductCard(product: Product) {
@@ -84,9 +84,9 @@ fun Rating(rating: Double) {
 @Preview(showBackground = true)
 @Composable
 fun ProductCardPreview() {
-    val jsonString = LocalContext.current.resources.openRawResource(R.raw.mock_product)
+    val jsonProduct = LocalContext.current.resources.openRawResource(R.raw.mock_product)
         .bufferedReader().use { it.readText() }
 
-    val sampleProducts = jsonString.toProduct()
+    val sampleProducts = jsonProduct.toProduct()
     ProductCard(product = sampleProducts)
 }

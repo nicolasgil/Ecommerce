@@ -1,14 +1,12 @@
-package com.nicolas.ecommerce.ui.screens.commons
+package com.nicolas.ecommerce.ui.screens
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 
 
-val categories = listOf("All", "Shoes", "Accessories", "Electronics")
-
 data class FilterOptions(
-    val category: String = categories[0],
+    val category: String = "categories[0]",
     val minPrice: Int = 0,
     val maxPrice: Int = 100,
     val minDiscount: Double = 0.0,

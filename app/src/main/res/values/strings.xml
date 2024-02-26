@@ -10,4 +10,7 @@
     //ProductCard
     <string name="productcard_text_description">Product</string>
     <string name="splash_text_description">Splash</string>
+
+    //Categories
+    <string name="categories_text_description_icon">ArrowDropDown</string>
 </resources>
