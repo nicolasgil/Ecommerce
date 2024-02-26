@@ -10,6 +10,10 @@
 
     //ProductCard
     <string name="text_description_image_product_card">Product</string>
+    <string name="text_title_dialog_out_stock">Sin Stock</string>
+    <string name="text_body_dialog_out_stock">Lo sentimos, este producto está agotado.</string>
+    <string name="text_button_dialog_out_stock">Entendido</string>
+    <string name="text_icon_rating_product_card">Icon Rating</string>
 
     //Splash
     <string name="text_description_image_splash">Splash</string>
@@ -20,4 +24,13 @@
     //Elements Visuals
     <string name="text_list_products_empty_warning_elements_visuals">No hay productos disponibles.</string>
     <string name="text_button_retry_elements_visuals">Reintentar</string>
+    <string name="text_button_accept_elements_visuals">Aceptar</string>
+    <string name="text_title_button_unexpected_error_elements_visuals">¡Lo sentimos!</string>
+    <string name="text_body_button_unexpected_error_elements_visuals">Ha ocurrido un error inesperado.</string>
+
+    //Commons
+    <string name="text_symbol_money">$</string>
+    <string name="text_title_price_section_price">Precio:</string>
+    <string name="text_title_discount_section_price">Descuento:</string>
+    <string name="text_title_final_price_section_price">Precio Final:</string>
 </resources>

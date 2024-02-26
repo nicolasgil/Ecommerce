@@ -63,4 +63,9 @@ class LobbyViewModel @Inject constructor(
             }
         }
     }
+
+
+    fun getProductById(productId: Int): Product? {
+        return list.value?.find { it.id == productId }
+    }
 }

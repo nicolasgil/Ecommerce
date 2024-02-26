@@ -7,16 +7,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
 import com.nicolas.ecommerce.domain.models.Product
+import com.nicolas.ecommerce.utils.loadSampleNavController
 import com.nicolas.ecommerce.utils.loadSampleProducts
 
 @Composable
-fun ProductsColumn(products: List<Product>) {
+fun ProductsColumn(products: List<Product>, navController: NavController) {
     LazyColumn(
         modifier = Modifier.padding(10.dp)
     ) {
         items(products) { product ->
-            ProductCard(product = product)
+            ProductCard(product = product, navController)
         }
     }
 }
@@ -24,6 +26,5 @@ fun ProductsColumn(products: List<Product>) {
 @Preview(showBackground = true)
 @Composable
 fun ProductsColumnPreview() {
-
-    ProductsColumn(products = loadSampleProducts())
+    ProductsColumn(products = loadSampleProducts(), loadSampleNavController())
 }

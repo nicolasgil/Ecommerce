@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -24,22 +23,23 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavController
 import com.nicolas.ecommerce.R
 import com.nicolas.ecommerce.domain.models.Product
 import com.nicolas.ecommerce.ui.viewmodels.LobbyViewModel
 import com.nicolas.ecommerce.utils.WarningMessage
 import com.nicolas.ecommerce.utils.loadSampleCategories
+import com.nicolas.ecommerce.utils.loadSampleNavController
 import com.nicolas.ecommerce.utils.loadSampleProducts
 
 @Composable
-fun LobbyScreen(viewModel: LobbyViewModel) {
+fun LobbyScreen(viewModel: LobbyViewModel, navController: NavController) {
     val list by viewModel.list.observeAsState()
     val loading by viewModel.loading.observeAsState()
     val categories by viewModel.categories.observeAsState()
 
     Surface(
-        modifier = Modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+        modifier = Modifier.fillMaxSize()
     ) {
         if (loading == true) {
             CircularProgressIndicator()
@@ -47,7 +47,7 @@ fun LobbyScreen(viewModel: LobbyViewModel) {
             if (list.isNullOrEmpty()) {
                 WarningMessage(stringResource(R.string.text_list_products_empty_warning_elements_visuals), viewModel)
             } else {
-                App(list.orEmpty(), categories.orEmpty())
+                App(list.orEmpty(), categories.orEmpty(), navController)
             }
         }
     }
@@ -55,13 +55,12 @@ fun LobbyScreen(viewModel: LobbyViewModel) {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun App(productItem: List<Product>, categories: List<String>) {
+fun App(productItem: List<Product>, categories: List<String>, navController: NavController) {
     val products = remember { productItem }
     var searchText by remember { mutableStateOf("") }
 
     Scaffold(
-        modifier = Modifier.background(Color.White),
-        topBar = {
+        modifier = Modifier.background(Color.White), topBar = {
             TopAppBar(
                 title = {
                     Text(
@@ -83,23 +82,26 @@ fun App(productItem: List<Product>, categories: List<String>) {
                 })
 
                 if (categories.isNotEmpty()) {
-                    var itemSelected by remember { mutableStateOf(categories[0]) }
-                    CategoriesScreen(
-                        categories = categories,
-                        onItemSelected = { itemSelected = it }
-                    )
-                    ProductsColumn(
-                        products.filter {
-                            it.title.contains(searchText, ignoreCase = true) &&
-                                    (it.category.uppercase() == itemSelected.uppercase() || itemSelected.isBlank())
-                        }
-                    )
+                    var itemSelected by remember { mutableStateOf("ALL") }
+
+                    CategoriesScreen(categories = listOf("ALL") + categories,
+                        onItemSelected = { itemSelected = it })
+
+                    val filteredProducts = products.filter {
+                        it.title.contains(
+                            searchText,
+                            ignoreCase = true
+                        ) && (itemSelected.uppercase() == "ALL" || it.category.uppercase() == itemSelected.uppercase())
+                    }
+
+                    ProductsColumn(filteredProducts, navController)
                 } else {
-                    ProductsColumn(
-                        products.filter {
-                            it.title.contains(searchText, ignoreCase = true)
-                        }
-                    )
+
+                    val filteredProducts = products.filter {
+                        it.title.contains(searchText, ignoreCase = true)
+                    }
+                    ProductsColumn(filteredProducts, navController)
+
                 }
             }
         }
@@ -109,5 +111,5 @@ fun App(productItem: List<Product>, categories: List<String>) {
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_NO)
 @Composable
 fun AppPreview() {
-    App(loadSampleProducts(), loadSampleCategories())
+    App(loadSampleProducts(), loadSampleCategories(), loadSampleNavController())
 }
