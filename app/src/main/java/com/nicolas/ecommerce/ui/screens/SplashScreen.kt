@@ -31,7 +31,7 @@ fun SplashScreen(navController: NavHostController) {
 fun Splash() {
     Image(
         painter = painterResource(id = R.drawable.ic_splash),
-        contentDescription = stringResource(R.string.splash_text_description),
+        contentDescription = stringResource(R.string.text_description_image_splash),
         modifier = Modifier
             .fillMaxSize()
             .wrapContentSize(Alignment.Center)

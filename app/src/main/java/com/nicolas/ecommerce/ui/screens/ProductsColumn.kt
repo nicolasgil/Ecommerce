@@ -5,12 +5,10 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.nicolas.ecommerce.R
 import com.nicolas.ecommerce.domain.models.Product
-import com.nicolas.ecommerce.utils.toProduct
+import com.nicolas.ecommerce.utils.loadSampleProducts
 
 @Composable
 fun ProductsColumn(products: List<Product>) {
@@ -26,9 +24,6 @@ fun ProductsColumn(products: List<Product>) {
 @Preview(showBackground = true)
 @Composable
 fun ProductsColumnPreview() {
-    val jsonProduct = LocalContext.current.resources.openRawResource(R.raw.mock_product)
-        .bufferedReader().use { it.readText() }
 
-    val sampleProducts = listOf(jsonProduct.toProduct(), jsonProduct.toProduct(), jsonProduct.toProduct(), jsonProduct.toProduct())
-    ProductsColumn(products = sampleProducts)
+    ProductsColumn(products = loadSampleProducts())
 }

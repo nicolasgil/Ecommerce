@@ -2,7 +2,6 @@ package com.nicolas.ecommerce.ui.screens
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,44 +19,35 @@ import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import com.nicolas.ecommerce.R
 import com.nicolas.ecommerce.domain.models.Product
 import com.nicolas.ecommerce.ui.viewmodels.LobbyViewModel
-import com.nicolas.ecommerce.utils.toProduct
+import com.nicolas.ecommerce.utils.WarningMessage
+import com.nicolas.ecommerce.utils.loadSampleCategories
+import com.nicolas.ecommerce.utils.loadSampleProducts
 
 @Composable
 fun LobbyScreen(viewModel: LobbyViewModel) {
-
     val list by viewModel.list.observeAsState()
     val loading by viewModel.loading.observeAsState()
     val categories by viewModel.categories.observeAsState()
-
-
 
     Surface(
         modifier = Modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
     ) {
         if (loading == true) {
-            Column(
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally,
-            ) {
-                CircularProgressIndicator()
-            }
-        }
-
-        if (!list.isNullOrEmpty()) {
-            if (!categories.isNullOrEmpty()) {
-
-                App(list!!, categories!!)
+            CircularProgressIndicator()
+        } else {
+            if (list.isNullOrEmpty()) {
+                WarningMessage(stringResource(R.string.text_list_products_empty_warning_elements_visuals), viewModel)
+            } else {
+                App(list.orEmpty(), categories.orEmpty())
             }
         }
     }
@@ -66,13 +56,8 @@ fun LobbyScreen(viewModel: LobbyViewModel) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun App(productItem: List<Product>, categories: List<String>) {
-
+    val products = remember { productItem }
     var searchText by remember { mutableStateOf("") }
-
-    val products = remember {
-        productItem
-    }
-
 
     Scaffold(
         modifier = Modifier.background(Color.White),
@@ -80,9 +65,8 @@ fun App(productItem: List<Product>, categories: List<String>) {
             TopAppBar(
                 title = {
                     Text(
-                        text = stringResource(R.string.lobby_text_title),
-                        modifier = Modifier
-                            .fillMaxWidth(),
+                        text = stringResource(R.string.text_title_screen_lobby),
+                        modifier = Modifier.fillMaxWidth(),
                         textAlign = TextAlign.Center
                     )
                 }
@@ -94,22 +78,29 @@ fun App(productItem: List<Product>, categories: List<String>) {
                     .fillMaxSize()
                     .padding(padding)
             ) {
+                SearchBar(searchText = searchText, onSearchTextChange = { newText ->
+                    searchText = newText
+                })
 
-                SearchBar(
-                    searchText = searchText,
-                    onSearchTextChange = { newText ->
-                        searchText = newText
-                    }
-                )
-
-                CategoriesScreen(categories = categories)
-
-
-                ProductsColumn(
-                    products.filter {
-                        it.title.contains(searchText, ignoreCase = true)
-                    }
-                )
+                if (categories.isNotEmpty()) {
+                    var itemSelected by remember { mutableStateOf(categories[0]) }
+                    CategoriesScreen(
+                        categories = categories,
+                        onItemSelected = { itemSelected = it }
+                    )
+                    ProductsColumn(
+                        products.filter {
+                            it.title.contains(searchText, ignoreCase = true) &&
+                                    (it.category.uppercase() == itemSelected.uppercase() || itemSelected.isBlank())
+                        }
+                    )
+                } else {
+                    ProductsColumn(
+                        products.filter {
+                            it.title.contains(searchText, ignoreCase = true)
+                        }
+                    )
+                }
             }
         }
     )
@@ -118,9 +109,5 @@ fun App(productItem: List<Product>, categories: List<String>) {
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_NO)
 @Composable
 fun AppPreview() {
-    val jsonProduct = LocalContext.current.resources.openRawResource(R.raw.mock_product)
-        .bufferedReader().use { it.readText() }
-
-    val sampleProducts = listOf(jsonProduct.toProduct())
-    App(sampleProducts, listOf("Categoría 1", "Categoría 2", "Categoría 3"))
+    App(loadSampleProducts(), loadSampleCategories())
 }

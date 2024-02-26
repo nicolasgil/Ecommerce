@@ -29,7 +29,7 @@ fun SearchBar(searchText: String, onSearchTextChange: (String) -> Unit) {
         OutlinedTextField(
             value = searchText,
             onValueChange = { onSearchTextChange(it) },
-            placeholder = { Text(stringResource(R.string.searchbar_text_placeholder)) },
+            placeholder = { Text(stringResource(R.string.text_placeholder_bar_searchbar)) },
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(8.dp)
@@ -37,7 +37,7 @@ fun SearchBar(searchText: String, onSearchTextChange: (String) -> Unit) {
         )
         Icon(
             Icons.Default.Search,
-            contentDescription = stringResource(R.string.searchbar_text_placeholder),
+            contentDescription = stringResource(R.string.text_placeholder_bar_searchbar),
             modifier = Modifier
                 .size(54.dp)
                 .padding(end = 15.dp)
@@ -50,6 +50,6 @@ fun SearchBar(searchText: String, onSearchTextChange: (String) -> Unit) {
 @Composable
 fun SearchBarPreview() {
     SearchBar(
-        searchText = stringResource(R.string.searchbar_text_placeholder),
+        searchText = stringResource(R.string.text_placeholder_bar_searchbar),
         onSearchTextChange = {})
 }

@@ -14,7 +14,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -22,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import com.nicolas.ecommerce.R
 import com.nicolas.ecommerce.domain.models.Product
 import com.nicolas.ecommerce.utils.LoadImageFromUrl
-import com.nicolas.ecommerce.utils.toProduct
+import com.nicolas.ecommerce.utils.loadSampleProducts
 
 @Composable
 fun ProductCard(product: Product) {
@@ -37,7 +36,7 @@ fun ProductCard(product: Product) {
         ) {
             LoadImageFromUrl(
                 imageUrl = product.thumbnail,
-                description = stringResource(R.string.productcard_text_description),
+                description = stringResource(R.string.text_description_image_product_card),
                 R.drawable.ic_placeholder_image,
                 500.dp, 150.dp
             )
@@ -84,9 +83,5 @@ fun Rating(rating: Double) {
 @Preview(showBackground = true)
 @Composable
 fun ProductCardPreview() {
-    val jsonProduct = LocalContext.current.resources.openRawResource(R.raw.mock_product)
-        .bufferedReader().use { it.readText() }
-
-    val sampleProducts = jsonProduct.toProduct()
-    ProductCard(product = sampleProducts)
+    ProductCard(product = loadSampleProducts().first())
 }

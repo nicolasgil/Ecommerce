@@ -1,5 +1,6 @@
 package com.nicolas.ecommerce.data.datasources.local
 
+import android.util.Log
 import com.nicolas.ecommerce.data.datasources.local.localmodel.CategoriesLocal
 import com.nicolas.ecommerce.data.datasources.local.localmodel.ProductLocal
 import com.nicolas.ecommerce.domain.models.Product
@@ -10,25 +11,42 @@ class LocalDataSourceImpl @Inject constructor(
 ) : LocalDataSource {
 
     override suspend fun getProductList(): List<Product> {
-        return productDao.getAllProducts().map { it.toDomainModel() }
+        return try {
+            productDao.getAllProducts().map { it.toDomainModel() }
+        } catch (e: Exception) {
+            Log.e("LocalDataSourceImpl", "Error fetching products from local database", e)
+            emptyList()
+        }
     }
 
     override suspend fun productListIsEmpty(): Boolean = productDao.productCount() == 0
 
     override suspend fun saveProductList(products: List<Product>) {
-        productDao.insertAllProducts(products.fromDomainModel())
+        try {
+            productDao.insertAllProducts(products.fromDomainModel())
+        } catch (e: Exception) {
+            Log.e("LocalDataSourceImpl", "Error saving products to local database", e)
+        }
     }
 
     override suspend fun getCategoriesList(): List<String> {
-        return productDao.getCategories().toCategoriesList()
+        return try {
+            productDao.getCategories().toCategoriesList()
+        } catch (e: Exception) {
+            Log.e("LocalDataSourceImpl", "Error fetching categories from local database", e)
+            emptyList()
+        }
     }
 
     override suspend fun categoriesListIsEmpty(): Boolean = productDao.categoriesCount() == 0
 
     override suspend fun saveCategoriesList(categories: List<String>) {
-        productDao.insertCategories(listOf(categories.toCategoriesLocal()))
+        try {
+            productDao.insertCategories(listOf(categories.toCategoriesLocal()))
+        } catch (e: Exception) {
+            Log.e("LocalDataSourceImpl", "Error saving categories to local database", e)
+        }
     }
-
 }
 
 fun List<String>.toCategoriesLocal(): CategoriesLocal {

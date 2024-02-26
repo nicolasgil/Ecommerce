@@ -2,15 +2,22 @@
     <string name="app_name">Ecommerce</string>
 
     //Lobby
-    <string name="lobby_text_title">Home</string>
+    <string name="text_title_screen_lobby">Home</string>
+    <string name="text_description_icon_warning_lobby">Icon Warning</string>
 
     //SearchBar
-    <string name="searchbar_text_placeholder">Buscar</string>
+    <string name="text_placeholder_bar_searchbar">Buscar</string>
 
     //ProductCard
-    <string name="productcard_text_description">Product</string>
-    <string name="splash_text_description">Splash</string>
+    <string name="text_description_image_product_card">Product</string>
+
+    //Splash
+    <string name="text_description_image_splash">Splash</string>
 
     //Categories
-    <string name="categories_text_description_icon">ArrowDropDown</string>
+    <string name="text_description_icon_arrow_down_categories">ArrowDropDown</string>
+
+    //Elements Visuals
+    <string name="text_list_products_empty_warning_elements_visuals">No hay productos disponibles.</string>
+    <string name="text_button_retry_elements_visuals">Reintentar</string>
 </resources>

@@ -1,15 +1,18 @@
 package com.nicolas.ecommerce.domain.usecases
 
+import android.util.Log
 import com.nicolas.ecommerce.data.repositories.ProductRepository
-import com.nicolas.ecommerce.domain.models.Product
-import com.nicolas.ecommerce.utils.sortByRatingDescThenById
 import javax.inject.Inject
 
-class GetCategoriesUseCase@Inject constructor(
+class GetCategoriesUseCase @Inject constructor(
     private val productRepository: ProductRepository
-
 ) {
     suspend operator fun invoke(): List<String> {
-        return productRepository.getCategories()
+        return try {
+            productRepository.getCategories()
+        } catch (e: Exception) {
+            Log.e("GetCategoriesUseCase", "Error fetching categories", e)
+            emptyList()
+        }
     }
 }

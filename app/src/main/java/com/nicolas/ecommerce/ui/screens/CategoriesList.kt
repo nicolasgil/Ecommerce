@@ -11,7 +11,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
@@ -29,11 +28,12 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nicolas.ecommerce.R
+import com.nicolas.ecommerce.utils.loadSampleCategories
 
-@OptIn(ExperimentalMaterial3Api::class)
+
 @Composable
-fun CategoriesScreen(categories: List<String>) {
-    var selectedCategory by remember { mutableStateOf(categories[0]) }
+fun CategoriesScreen(categories: List<String>, onItemSelected: (String) -> Unit) {
+    var selectedCategory by remember { mutableStateOf(categories[0].uppercase()) }
     var expaned by remember { mutableStateOf(false) }
 
     Column(modifier = Modifier.background(Color.White)) {
@@ -51,7 +51,7 @@ fun CategoriesScreen(categories: List<String>) {
                 Icon(
                     tint = Color.Black,
                     imageVector = Icons.Default.ArrowDropDown,
-                    contentDescription = stringResource(R.string.categories_text_description_icon),
+                    contentDescription = stringResource(R.string.text_description_icon_arrow_down_categories),
                     modifier = Modifier.size(24.dp)
                 )
             },
@@ -69,10 +69,11 @@ fun CategoriesScreen(categories: List<String>) {
             categories.forEach { category ->
                 DropdownMenuItem(
                     onClick = {
-                        selectedCategory = category
+                        selectedCategory = category.uppercase()
                         expaned = false
+                        onItemSelected(selectedCategory.uppercase())
                     },
-                    text = { Text(text = category) }
+                    text = { Text(text = category.uppercase()) }
                 )
             }
         }
@@ -85,5 +86,7 @@ fun CategoriesScreen(categories: List<String>) {
 @Composable
 @Preview(showBackground = true)
 fun CategoriesListPreview() {
-    CategoriesScreen(categories = listOf("Categoría 1", "Categoría 2", "Categoría 3"))
+    CategoriesScreen(
+        categories = loadSampleCategories(),
+        onItemSelected = {})
 }

@@ -1,22 +1,32 @@
 package com.nicolas.ecommerce.data.datasources.remote
 
+import android.util.Log
 import com.nicolas.ecommerce.data.datasources.remote.remotemodel.ProductRemoteData
 import com.nicolas.ecommerce.domain.models.Product
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class RemoteRemoteDataSourceImpl @Inject constructor(
     private val productService: ProductService,
 ) : RemoteDataSource {
-    override suspend fun getAllProducts(): List<Product>  {
-        val response = productService.getProducts().body()
-        return response?.products?.toDomainModel() ?: emptyList()
+
+    override suspend fun getAllProducts(): List<Product> {
+        return try {
+            val response = productService.getProducts().body()
+            response?.products?.toDomainModel() ?: emptyList()
+        } catch (e: Exception) {
+            Log.e("RemoteRemoteDataSource", "Error fetching remote products", e)
+            emptyList()
+        }
     }
 
     override suspend fun getCategories(): List<String> {
-        val response = productService.getCategories().body()
-        return response?: emptyList()
+        return try {
+            val response = productService.getCategories().body()
+            response ?: emptyList()
+        } catch (e: Exception) {
+            Log.e("RemoteRemoteDataSource", "Error fetching remote categories", e)
+            emptyList()
+        }
     }
 
     private fun List<ProductRemoteData>.toDomainModel(): List<Product> =
@@ -36,5 +46,4 @@ class RemoteRemoteDataSourceImpl @Inject constructor(
             thumbnail,
             images
         )
-
 }
