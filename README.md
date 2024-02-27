@@ -14,7 +14,7 @@ La aplicación está diseñada para realizar consumos a internet y mostrar los p
 * Room: La persistencia de datos se gestiona mediante la biblioteca Room, facilitando el almacenamiento y recuperación de datos locales.
 * Coroutines: Se aprovechan las coroutines de Kotlin para realizar operaciones asíncronas de manera concisa y eficiente.
 * Pruebas Unitarias: Son un componente esencial en el desarrollo de software que permite verificar el comportamiento correcto de unidades individuales de código, como funciones o métodos, de manera aislada. En el contexto de Android y Kotlin, JUnit es una biblioteca ampliamente utilizada para escribir y ejecutar pruebas unitarias.
-* Para configurar el entorno de pruebas en tu proyecto, se utiliza la biblioteca JUnit junto con Mock y Mockito para crear y manejar objetos simulados (mocks) durante las pruebas.
+Para configurar el entorno de pruebas en tu proyecto, se utiliza la biblioteca JUnit junto con Mock y Mockito para crear y manejar objetos simulados (mocks) durante las pruebas.
 
 ## Requisitos del Sistema
 Dispositivo con sistema operativo Android 7.0 (API nivel 24 | Android Nougat) o superior.
@@ -25,4 +25,4 @@ Dispositivo con sistema operativo Android 7.0 (API nivel 24 | Android Nougat) o 
 3. Ejecuta la aplicación en un dispositivo o emulador Android.
 
 
-Hecho por Nicolas Gil Villa https://github.com/nicolasgil | https://www.linkedin.com/in/nicolasgilvilla/
+##### Hecho por Nicolas Gil Villa https://github.com/nicolasgil | https://www.linkedin.com/in/nicolasgilvilla/
