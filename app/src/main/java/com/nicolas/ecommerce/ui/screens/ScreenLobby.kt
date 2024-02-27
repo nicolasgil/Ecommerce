@@ -15,8 +15,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -43,23 +43,25 @@ import com.nicolas.ecommerce.utils.dummyProducts
 
 @Composable
 fun ScreenLobby(viewModel: LobbyViewModel, navController: NavController) {
-    val uiState by viewModel.uiState.collectAsState()
+    val list by viewModel.list.observeAsState()
+    val loading by viewModel.loading.observeAsState()
+    val categories by viewModel.categories.observeAsState()
 
     Surface(
         modifier = Modifier.fillMaxSize()
     ) {
-        if (uiState.loading) {
+        if (loading == true) {
             CircularProgressIndicator()
         } else {
-            if (uiState.products.isNullOrEmpty()) {
+            if (list.isNullOrEmpty()) {
                 WarningMessage(
                     stringResource(R.string.text_list_products_empty_warning_elements_visuals),
                     viewModel
                 )
             } else {
                 PrincipalScreen(
-                    uiState.products.orEmpty(),
-                    uiState.categories.orEmpty(),
+                    list.orEmpty(),
+                    categories.orEmpty(),
                     navController
                 )
             }

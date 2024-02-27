@@ -1,15 +1,14 @@
 package com.nicolas.ecommerce.ui.viewmodels
 
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.nicolas.ecommerce.domain.models.Product
 import com.nicolas.ecommerce.domain.usecases.GetCategoriesUseCase
 import com.nicolas.ecommerce.domain.usecases.GetProductsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,24 +18,35 @@ class LobbyViewModel @Inject constructor(
     private val getCategoriesUseCase: GetCategoriesUseCase
 ) : ViewModel() {
 
+    private val _loading = MutableLiveData<Boolean>()
+    val loading: LiveData<Boolean> = _loading
 
-    private val _uiState = MutableStateFlow(UiState())
-    val uiState: StateFlow<UiState> = _uiState.asStateFlow()
+    private val _list = MutableLiveData<List<Product>>()
+    val list: LiveData<List<Product>> = _list
+
+    private val _categories = MutableLiveData<List<String>>()
+    val categories: LiveData<List<String>> = _categories
 
     init {
-        getData()
-    }
-
-    fun getData() {
         viewModelScope.launch {
             try {
-                _uiState.value = UiState(loading = true)
-                _uiState.value = UiState(products = getProductsUseCase.invoke())
-                _uiState.value = UiState(categories = getCategoriesUseCase.invoke())
+                _loading.value = true
+                _list.value = getProductsUseCase.invoke()
             } catch (e: Exception) {
                 Log.e("LobbyViewModel", "Error initializing list", e)
             } finally {
-                _uiState.value = UiState(loading = false)
+                _loading.value = false
+            }
+        }
+
+        viewModelScope.launch {
+            try {
+                _loading.value = true
+                _categories.value = getCategoriesUseCase.invoke()
+            } catch (e: Exception) {
+                Log.e("LobbyViewModel", "Error fetching categories", e)
+            } finally {
+                _loading.value = false
             }
         }
     }
@@ -44,24 +54,18 @@ class LobbyViewModel @Inject constructor(
     fun tryAgainGetProducts() {
         viewModelScope.launch {
             try {
-                _uiState.value = UiState(loading = true)
-                _uiState.value = UiState(products = getProductsUseCase.invoke())
+                _loading.value = true
+                _list.value = getProductsUseCase.invoke()
             } catch (e: Exception) {
-                Log.e("LobbyViewModel", "Error fetching list", e)
+                Log.e("LobbyViewModel", "Error fetching products", e)
             } finally {
-                _uiState.value = UiState(loading = false)
+                _loading.value = false
             }
         }
     }
 
 
     fun getProductById(productId: Int): Product? {
-        return _uiState.value.products?.find { it.id == productId }
+        return list.value?.find { it.id == productId }
     }
-
-    data class UiState(
-        val loading: Boolean = false,
-        val products: List<Product>? = null,
-        val categories: List<String>? = null,
-    )
 }
