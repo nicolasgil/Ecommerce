@@ -1,5 +1,6 @@
 package com.nicolas.ecommerce.ui.screens
 
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -10,13 +11,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nicolas.ecommerce.R
 import com.nicolas.ecommerce.domain.models.Product
-import com.nicolas.ecommerce.utils.loadSampleProducts
+import com.nicolas.ecommerce.utils.dummyProducts
 import kotlin.math.roundToInt
 
 @Composable
@@ -26,11 +28,15 @@ fun PriceSection(product: Product) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp),
+            .padding(3.dp)
+            .border(1.dp, Color.Black),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Column {
+        Column(
+            modifier = Modifier
+                .padding(8.dp)
+        ) {
             Text(
                 text = stringResource(R.string.text_title_price_section_price),
                 style = MaterialTheme.typography.bodyMedium
@@ -44,7 +50,10 @@ fun PriceSection(product: Product) {
                 style = MaterialTheme.typography.bodyMedium
             )
         }
-        Column(horizontalAlignment = Alignment.End) {
+        Column(
+            horizontalAlignment = Alignment.End, modifier = Modifier
+                .padding(8.dp)
+        ) {
             Text(
                 text = "$${product.price}",
                 style = MaterialTheme.typography.bodySmall,
@@ -68,5 +77,5 @@ fun PriceSection(product: Product) {
 @Composable
 @Preview(showBackground = true)
 fun PreviewSectionPrice() {
-    PriceSection(loadSampleProducts().first())
+    PriceSection(dummyProducts().first())
 }

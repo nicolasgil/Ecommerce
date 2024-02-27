@@ -20,8 +20,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonColors
-import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -39,16 +37,18 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import com.nicolas.ecommerce.R
 import com.nicolas.ecommerce.domain.models.Product
 import com.nicolas.ecommerce.utils.UnexpectedError
-import com.nicolas.ecommerce.utils.loadSampleNavController
-import com.nicolas.ecommerce.utils.loadSampleProducts
+import com.nicolas.ecommerce.utils.dummyNavController
+import com.nicolas.ecommerce.utils.dummyProducts
 import kotlinx.coroutines.delay
 
 @Composable
@@ -88,37 +88,37 @@ fun DetailScreen(navController: NavHostController, product: Product?) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailContent(product: Product, navController: NavHostController) {
-    Scaffold(topBar = {
-        TopAppBar(title = {
-            Text(text = "Detalles del producto")
-        }, navigationIcon = {
-            IconButton(onClick = { navController.popBackStack() }) {
-                Icon(Icons.Default.ArrowBack, contentDescription = "Back")
-            }
-        })
-    }, content = { padding ->
-        Card(
-            modifier = Modifier
-                .padding(4.dp)
-                .background(Color.White),
-            elevation = CardDefaults.cardElevation(12.dp)
-        ) {
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(text = stringResource(R.string.text_title_appbar_product_details))
+                },
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(
+                            Icons.Default.ArrowBack,
+                            contentDescription = stringResource(R.string.text_description_arrow_back_details)
+                        )
+                    }
+                }
+            )
+        },
+        content = { padding ->
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(padding)
                     .background(Color.White)
+                    .padding(padding)
             ) {
                 Column(
                     modifier = Modifier
-                        .fillMaxSize()
                         .verticalScroll(rememberScrollState())
-                        .padding(16.dp)
+                        .padding(horizontal = 16.dp, vertical = 1.dp)
                 ) {
                     ImageSlider(images = product.images)
 
-                    Spacer(modifier = Modifier.height(16.dp))
-
+                    Spacer(modifier = Modifier.height(8.dp))
 
                     Text(
                         text = product.title,
@@ -128,7 +128,7 @@ fun DetailContent(product: Product, navController: NavHostController) {
                         )
                     )
 
-                    Spacer(modifier = Modifier.height(8.dp))
+                    Spacer(modifier = Modifier.height(4.dp))
 
                     Text(
                         text = product.description,
@@ -139,7 +139,6 @@ fun DetailContent(product: Product, navController: NavHostController) {
                     )
 
                     Spacer(modifier = Modifier.height(8.dp))
-
 
                     Row(
                         modifier = Modifier
@@ -160,26 +159,24 @@ fun DetailContent(product: Product, navController: NavHostController) {
 
                     Spacer(modifier = Modifier.height(8.dp))
 
-
                     PriceSection(product = product)
 
-                    Spacer(modifier = Modifier.height(16.dp))
-
+                    Spacer(modifier = Modifier.height(8.dp))
 
                     Row(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.Bottom
                     ) {
                         ButtonCustom("Modificar", {}, Color.Blue)
                         ButtonCustom("Borrar", {}, Color.Red)
-
                     }
                 }
             }
         }
-    })
-
+    )
 }
+
 
 @Composable
 fun ButtonCustom(message: String, onClick: () -> Unit, colorForeground: Color) {
@@ -207,6 +204,6 @@ fun ButtonCustom(message: String, onClick: () -> Unit, colorForeground: Color) {
 @Composable
 @Preview(showSystemUi = true)
 fun PreviewDetail() {
-    DetailContent(loadSampleProducts().first(), loadSampleNavController())
+    DetailContent(dummyProducts().first(), dummyNavController())
 
 }

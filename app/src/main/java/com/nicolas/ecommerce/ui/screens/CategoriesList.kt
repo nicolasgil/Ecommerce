@@ -28,7 +28,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.nicolas.ecommerce.R
-import com.nicolas.ecommerce.utils.loadSampleCategories
+import com.nicolas.ecommerce.utils.dummyCategories
 
 
 @Composable
@@ -87,6 +87,6 @@ fun CategoriesScreen(categories: List<String>, onItemSelected: (String) -> Unit)
 @Preview(showBackground = true)
 fun CategoriesListPreview() {
     CategoriesScreen(
-        categories = loadSampleCategories(),
+        categories = dummyCategories(),
         onItemSelected = {})
 }

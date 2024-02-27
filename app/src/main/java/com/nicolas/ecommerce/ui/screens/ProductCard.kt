@@ -33,8 +33,8 @@ import com.nicolas.ecommerce.domain.models.Product
 import com.nicolas.ecommerce.ui.navigation.AppScreen
 import com.nicolas.ecommerce.utils.LoadImageFromUrl
 import com.nicolas.ecommerce.utils.OutOfStockDialog
-import com.nicolas.ecommerce.utils.loadSampleNavController
-import com.nicolas.ecommerce.utils.loadSampleProducts
+import com.nicolas.ecommerce.utils.dummyNavController
+import com.nicolas.ecommerce.utils.dummyProducts
 
 @Composable
 fun ProductCard(product: Product, navController: NavController) {
@@ -122,5 +122,5 @@ fun Rating(rating: Double) {
 @Preview(showBackground = true)
 @Composable
 fun ProductCardPreview() {
-    ProductCard(product = loadSampleProducts().first(), loadSampleNavController())
+    ProductCard(product = dummyProducts().first(), dummyNavController())
 }

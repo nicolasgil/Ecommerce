@@ -6,13 +6,13 @@
     <string name="text_description_icon_warning_lobby">Icon Warning</string>
 
     //SearchBar
-    <string name="text_placeholder_bar_searchbar">Buscar</string>
+    <string name="text_placeholder_bar_searchbar">Search</string>
 
     //ProductCard
     <string name="text_description_image_product_card">Product</string>
-    <string name="text_title_dialog_out_stock">Sin Stock</string>
-    <string name="text_body_dialog_out_stock">Lo sentimos, este producto está agotado.</string>
-    <string name="text_button_dialog_out_stock">Entendido</string>
+    <string name="text_title_dialog_out_stock">Out of stock</string>
+    <string name="text_body_dialog_out_stock">Sorry, this product is out of stock.</string>
+    <string name="text_button_dialog_out_stock">Understood</string>
     <string name="text_icon_rating_product_card">Icon Rating</string>
 
     //Splash
@@ -22,15 +22,23 @@
     <string name="text_description_icon_arrow_down_categories">ArrowDropDown</string>
 
     //Elements Visuals
-    <string name="text_list_products_empty_warning_elements_visuals">No hay productos disponibles.</string>
-    <string name="text_button_retry_elements_visuals">Reintentar</string>
-    <string name="text_button_accept_elements_visuals">Aceptar</string>
-    <string name="text_title_button_unexpected_error_elements_visuals">¡Lo sentimos!</string>
-    <string name="text_body_button_unexpected_error_elements_visuals">Ha ocurrido un error inesperado.</string>
+    <string name="text_list_products_empty_warning_elements_visuals">There are no products available.</string>
+    <string name="text_button_retry_elements_visuals">Retry</string>
+    <string name="text_button_accept_elements_visuals">Accept</string>
+    <string name="text_title_button_unexpected_error_elements_visuals">¡We are sorry!</string>
+    <string name="text_body_button_unexpected_error_elements_visuals">An unexpected error has occurred.</string>
 
     //Commons
     <string name="text_symbol_money">$</string>
-    <string name="text_title_price_section_price">Precio:</string>
-    <string name="text_title_discount_section_price">Descuento:</string>
-    <string name="text_title_final_price_section_price">Precio Final:</string>
+
+    //Details
+    <string name="text_title_price_section_price">Price:</string>
+    <string name="text_title_discount_section_price">Discount:</string>
+    <string name="text_title_final_price_section_price">Final Price:</string>
+    <string name="text_title_appbar_product_details">Product Details</string>
+    <string name="text_description_arrow_back_details">Back</string>
+    <string name="text_title_rating">Rating:</string>
+    <string name="text_category_default_categories">ALL CATEGORIES</string>
+    <string name="text_description_icon_filter">Filter</string>
+    <string name="text_button_apply_filter">Apply</string>
 </resources>

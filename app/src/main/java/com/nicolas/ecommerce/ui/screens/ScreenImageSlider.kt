@@ -2,8 +2,10 @@ package com.nicolas.ecommerce.ui.screens
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
@@ -28,7 +30,7 @@ import com.google.accompanist.pager.HorizontalPagerIndicator
 import com.google.accompanist.pager.calculateCurrentOffsetForPage
 import com.google.accompanist.pager.rememberPagerState
 import com.nicolas.ecommerce.R
-import com.nicolas.ecommerce.utils.loadSampleProducts
+import com.nicolas.ecommerce.utils.dummyProducts
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.yield
 import kotlin.math.absoluteValue
@@ -49,14 +51,19 @@ fun ImageSlider(images: List<String>) {
         }
     }
 
-    Column {
+    Column(
+        modifier = Modifier
+            .fillMaxHeight()
+            .height(200.dp)
+    ) {
         HorizontalPager(
             count = images.size,
             state = pagerState,
             contentPadding = PaddingValues(horizontal = 16.dp),
             modifier = Modifier
-                .height(114.dp)
+                .height(200.dp)
                 .fillMaxWidth()
+                .border(1.dp, Color.Black),
         ) { page ->
             Card(
                 shape = RoundedCornerShape(12.dp),
@@ -127,5 +134,5 @@ fun LoadImageCarouselFromUrl(
 @Composable
 @Preview(showSystemUi = true)
 fun PreviewImageSlider() {
-    ImageSlider(loadSampleProducts().first().images)
+    ImageSlider(dummyProducts().first().images)
 }

@@ -9,8 +9,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.nicolas.ecommerce.domain.models.Product
-import com.nicolas.ecommerce.utils.loadSampleNavController
-import com.nicolas.ecommerce.utils.loadSampleProducts
+import com.nicolas.ecommerce.utils.dummyNavController
+import com.nicolas.ecommerce.utils.dummyProducts
 
 @Composable
 fun ProductsColumn(products: List<Product>, navController: NavController) {
@@ -26,5 +26,5 @@ fun ProductsColumn(products: List<Product>, navController: NavController) {
 @Preview(showBackground = true)
 @Composable
 fun ProductsColumnPreview() {
-    ProductsColumn(products = loadSampleProducts(), loadSampleNavController())
+    ProductsColumn(products = dummyProducts(), dummyNavController())
 }
