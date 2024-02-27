@@ -37,5 +37,9 @@ Dispositivo con sistema operativo Android 7.0 (API nivel 24 | Android Nougat) o 
 2. Abre el proyecto en Android Studio.
 3. Ejecuta la aplicación en un dispositivo o emulador Android.
 
+## IMPORTANTE
+Tener en cuenta que versión de Gradle utilizada en la construcción de la aplicación fue la 8.2 y la versión de Android Studio Hedgehog | 2023.1.1 Patch 2
+
+
 
 ##### Hecho por Nicolas Gil Villa https://github.com/nicolasgil | https://www.linkedin.com/in/nicolasgilvilla/
