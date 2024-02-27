@@ -164,44 +164,10 @@ fun DetailContent(product: Product, navController: NavHostController) {
 
                     ComponentPriceSection(product = product)
 
-                    Spacer(modifier = Modifier.height(8.dp))
-
-                    Row(
-                        modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.SpaceBetween,
-                        verticalAlignment = Alignment.Bottom
-                    ) {
-                        ButtonCustom("Modificar", {}, Color.Blue)
-                        ButtonCustom("Borrar", {}, Color.Red)
-                    }
                 }
             }
         }
     )
-}
-
-
-@Composable
-fun ButtonCustom(message: String, onClick: () -> Unit, colorForeground: Color) {
-    Button(
-        onClick = { onClick },
-        modifier = Modifier
-            .width(150.dp)
-            .height(40.dp)
-            .background(Color.White),
-        colors = ButtonColors(
-            containerColor = colorForeground,
-            contentColor = Color.White,
-            disabledContainerColor = colorForeground,
-            disabledContentColor = Color.White
-        )
-    ) {
-        Text(
-            text = message, style = TextStyle(
-                color = Color.White
-            )
-        )
-    }
 }
 
 @Composable

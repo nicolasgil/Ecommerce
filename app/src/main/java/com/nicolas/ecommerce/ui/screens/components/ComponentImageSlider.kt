@@ -54,7 +54,7 @@ fun ComponentImageSlider(images: List<String>) {
     Column(
         modifier = Modifier
             .fillMaxHeight()
-            .height(200.dp)
+            .height(250.dp)
     ) {
         HorizontalPager(
             count = images.size,
