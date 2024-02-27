@@ -1,4 +1,4 @@
-package com.nicolas.ecommerce.ui.screens
+package com.nicolas.ecommerce.ui.screens.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -17,7 +17,7 @@ import androidx.compose.ui.unit.dp
 import com.nicolas.ecommerce.R
 
 @Composable
-fun RatingBar(rating: Double) {
+fun ComponentRatingBar(rating: Double) {
     val ratingInt = rating.toInt()
     Text(stringResource(R.string.text_title_rating))
     LinearProgressIndicator(
@@ -43,5 +43,5 @@ fun RatingBar(rating: Double) {
 @Preview(showSystemUi = true)
 @Composable
 fun PreviewRatingBar() {
-    RatingBar(rating = 2.0)
+    ComponentRatingBar(rating = 2.0)
 }

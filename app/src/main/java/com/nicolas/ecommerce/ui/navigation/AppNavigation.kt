@@ -7,9 +7,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.nicolas.ecommerce.ui.screens.DetailScreen
-import com.nicolas.ecommerce.ui.screens.LobbyScreen
-import com.nicolas.ecommerce.ui.screens.SplashScreen
+import com.nicolas.ecommerce.ui.screens.ScreenDetails
+import com.nicolas.ecommerce.ui.screens.ScreenLobby
+import com.nicolas.ecommerce.ui.screens.ScreenSplash
 import com.nicolas.ecommerce.ui.viewmodels.LobbyViewModel
 
 @Composable
@@ -19,11 +19,11 @@ fun AppNavigation() {
 
     NavHost(navController = navController, startDestination = AppScreen.SplashScreen.route) {
         composable(AppScreen.SplashScreen.route) {
-            SplashScreen(navController)
+            ScreenSplash(navController)
         }
         composable(AppScreen.LobbyScreen.route) {
             val viewModel = hiltViewModel<LobbyViewModel>()
-            LobbyScreen(viewModel, navController)
+            ScreenLobby(viewModel, navController)
         }
         composable(
             AppScreen.DetailScreen.route + "/{productId}",
@@ -35,7 +35,7 @@ fun AppNavigation() {
             val viewModel = hiltViewModel<LobbyViewModel>()
             val product = productId?.let { viewModel.getProductById(it) }
 
-            DetailScreen(navController, product)
+            ScreenDetails(navController, product)
 
         }
     }

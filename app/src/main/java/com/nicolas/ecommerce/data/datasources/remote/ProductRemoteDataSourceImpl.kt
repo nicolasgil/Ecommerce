@@ -5,7 +5,7 @@ import com.nicolas.ecommerce.data.datasources.remote.remotemodel.ProductRemoteDa
 import com.nicolas.ecommerce.domain.models.Product
 import javax.inject.Inject
 
-class RemoteRemoteDataSourceImpl @Inject constructor(
+class ProductRemoteDataSourceImpl @Inject constructor(
     private val productService: ProductService,
 ) : RemoteDataSource {
 

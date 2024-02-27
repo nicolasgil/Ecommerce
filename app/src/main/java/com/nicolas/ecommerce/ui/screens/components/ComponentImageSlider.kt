@@ -1,4 +1,4 @@
-package com.nicolas.ecommerce.ui.screens
+package com.nicolas.ecommerce.ui.screens.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -37,7 +37,7 @@ import kotlin.math.absoluteValue
 
 @OptIn(ExperimentalPagerApi::class)
 @Composable
-fun ImageSlider(images: List<String>) {
+fun ComponentImageSlider(images: List<String>) {
 
     val pagerState = rememberPagerState(initialPage = 0)
 
@@ -134,5 +134,5 @@ fun LoadImageCarouselFromUrl(
 @Composable
 @Preview(showSystemUi = true)
 fun PreviewImageSlider() {
-    ImageSlider(dummyProducts().first().images)
+    ComponentImageSlider(dummyProducts().first().images)
 }

@@ -1,4 +1,4 @@
-package com.nicolas.ecommerce.ui.screens
+package com.nicolas.ecommerce.ui.screens.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -32,7 +32,7 @@ import com.nicolas.ecommerce.utils.dummyCategories
 
 
 @Composable
-fun CategoriesScreen(categories: List<String>, onItemSelected: (String) -> Unit) {
+fun ComponentCategoriesList(categories: List<String>, onItemSelected: (String) -> Unit) {
     var selectedCategory by remember { mutableStateOf(categories[0].uppercase()) }
     var expaned by remember { mutableStateOf(false) }
 
@@ -86,7 +86,7 @@ fun CategoriesScreen(categories: List<String>, onItemSelected: (String) -> Unit)
 @Composable
 @Preview(showBackground = true)
 fun CategoriesListPreview() {
-    CategoriesScreen(
+    ComponentCategoriesList(
         categories = dummyCategories(),
         onItemSelected = {})
 }

@@ -1,4 +1,4 @@
-package com.nicolas.ecommerce.utils
+package com.nicolas.ecommerce.ui.screens.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -23,6 +23,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
@@ -46,8 +47,8 @@ import com.nicolas.ecommerce.ui.viewmodels.LobbyViewModel
 @Composable
 fun WarningMessage(message: String?, viewModel: LobbyViewModel?) {
     if (viewModel != null && message != null) {
-        val loading by viewModel.loading.observeAsState()
-        if (loading == true) {
+        val uiState by viewModel.uiState.collectAsState()
+        if (uiState.loading) {
             CircularProgressIndicator()
         } else {
             Box(

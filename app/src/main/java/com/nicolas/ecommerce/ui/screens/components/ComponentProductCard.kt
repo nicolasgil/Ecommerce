@@ -1,4 +1,4 @@
-package com.nicolas.ecommerce.ui.screens
+package com.nicolas.ecommerce.ui.screens.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -31,13 +31,11 @@ import androidx.navigation.NavController
 import com.nicolas.ecommerce.R
 import com.nicolas.ecommerce.domain.models.Product
 import com.nicolas.ecommerce.ui.navigation.AppScreen
-import com.nicolas.ecommerce.utils.LoadImageFromUrl
-import com.nicolas.ecommerce.utils.OutOfStockDialog
 import com.nicolas.ecommerce.utils.dummyNavController
 import com.nicolas.ecommerce.utils.dummyProducts
 
 @Composable
-fun ProductCard(product: Product, navController: NavController) {
+fun ComponentProductCard(product: Product, navController: NavController) {
     var isDialogVisible by remember { mutableStateOf(false) }
 
     Card(
@@ -122,5 +120,5 @@ fun Rating(rating: Double) {
 @Preview(showBackground = true)
 @Composable
 fun ProductCardPreview() {
-    ProductCard(product = dummyProducts().first(), dummyNavController())
+    ComponentProductCard(product = dummyProducts().first(), dummyNavController())
 }

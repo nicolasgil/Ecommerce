@@ -17,7 +17,7 @@ import kotlinx.coroutines.delay
 
 
 @Composable
-fun SplashScreen(navController: NavHostController) {
+fun ScreenSplash(navController: NavHostController) {
     Splash()
     LaunchedEffect(key1 = true) {
         delay(3000)

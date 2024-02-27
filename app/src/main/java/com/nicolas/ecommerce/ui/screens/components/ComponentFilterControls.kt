@@ -1,4 +1,4 @@
-package com.nicolas.ecommerce.ui.screens
+package com.nicolas.ecommerce.ui.screens.components
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -30,7 +30,7 @@ import com.nicolas.ecommerce.utils.dummyProducts
 
 
 @Composable
-fun FilterControls(products: List<Product>, onOrderBySelected: (SortBy) -> Unit) {
+fun ComponentFilterControls(products: List<Product>, onOrderBySelected: (SortBy) -> Unit) {
     if (products.isNotEmpty()) {
         var sortBy by remember { mutableStateOf(SortBy.RATING_HIGH_TO_LOW) }
         var showDialog by remember { mutableStateOf(false) }
@@ -91,5 +91,5 @@ inline fun <reified T : Enum<T>> EnumValues(): List<T> = enumValues<T>().toList(
 @Preview(showSystemUi = true)
 @Composable
 fun FilterControlsPreview() {
-    FilterControls(dummyProducts(), {})
+    ComponentFilterControls(dummyProducts(), {})
 }

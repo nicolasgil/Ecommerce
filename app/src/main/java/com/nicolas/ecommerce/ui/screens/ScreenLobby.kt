@@ -15,8 +15,8 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -29,30 +29,39 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import com.nicolas.ecommerce.R
 import com.nicolas.ecommerce.domain.models.Product
+import com.nicolas.ecommerce.ui.screens.components.ComponentCategoriesList
+import com.nicolas.ecommerce.ui.screens.components.ComponentFilterControls
+import com.nicolas.ecommerce.ui.screens.components.ComponentProductsColumn
+import com.nicolas.ecommerce.ui.screens.components.ComponentSearchBar
+import com.nicolas.ecommerce.ui.screens.components.WarningMessage
 import com.nicolas.ecommerce.ui.viewmodels.LobbyViewModel
 import com.nicolas.ecommerce.utils.SortBy
-import com.nicolas.ecommerce.utils.WarningMessage
 import com.nicolas.ecommerce.utils.applySorting
 import com.nicolas.ecommerce.utils.dummyCategories
 import com.nicolas.ecommerce.utils.dummyNavController
 import com.nicolas.ecommerce.utils.dummyProducts
 
 @Composable
-fun LobbyScreen(viewModel: LobbyViewModel, navController: NavController) {
-    val list by viewModel.list.observeAsState()
-    val loading by viewModel.loading.observeAsState()
-    val categories by viewModel.categories.observeAsState()
+fun ScreenLobby(viewModel: LobbyViewModel, navController: NavController) {
+    val uiState by viewModel.uiState.collectAsState()
 
     Surface(
         modifier = Modifier.fillMaxSize()
     ) {
-        if (loading == true) {
+        if (uiState.loading) {
             CircularProgressIndicator()
         } else {
-            if (list.isNullOrEmpty()) {
-                WarningMessage(stringResource(R.string.text_list_products_empty_warning_elements_visuals), viewModel)
+            if (uiState.products.isNullOrEmpty()) {
+                WarningMessage(
+                    stringResource(R.string.text_list_products_empty_warning_elements_visuals),
+                    viewModel
+                )
             } else {
-                PrincipalScreen(list.orEmpty(), categories.orEmpty(), navController)
+                PrincipalScreen(
+                    uiState.products.orEmpty(),
+                    uiState.categories.orEmpty(),
+                    navController
+                )
             }
         }
     }
@@ -85,7 +94,7 @@ fun PrincipalScreen(
                             textAlign = TextAlign.Center
                         )
 
-                        FilterControls(originalList, onOrderBySelected = {
+                        ComponentFilterControls(originalList, onOrderBySelected = {
                             orderBy = it
                             currentList = applySorting(originalList, orderBy)
                         })
@@ -99,7 +108,7 @@ fun PrincipalScreen(
                     .fillMaxSize()
                     .padding(padding)
             ) {
-                SearchBar(searchText = searchText, onSearchTextChange = { newText ->
+                ComponentSearchBar(searchText = searchText, onSearchTextChange = { newText ->
                     searchText = newText
                     currentList = applyFilterAndOrder(originalList, searchText, orderBy)
                 })
@@ -107,7 +116,7 @@ fun PrincipalScreen(
                 if (listCategories.isNotEmpty()) {
                     var itemSelected by remember { mutableStateOf(listCategories[0]) }
 
-                    CategoriesScreen(listCategories,
+                    ComponentCategoriesList(listCategories,
                         onItemSelected = { itemSelected = it })
 
                     currentList =
@@ -117,7 +126,7 @@ fun PrincipalScreen(
                     currentList = applyFilterAndOrder(originalList, searchText, orderBy)
                 }
 
-                ProductsColumn(currentList, navController)
+                ComponentProductsColumn(currentList, navController)
 
             }
         }

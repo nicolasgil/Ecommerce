@@ -1,4 +1,4 @@
-package com.nicolas.ecommerce.ui.screens
+package com.nicolas.ecommerce.ui.screens.components
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -22,7 +22,7 @@ import com.nicolas.ecommerce.utils.dummyProducts
 import kotlin.math.roundToInt
 
 @Composable
-fun PriceSection(product: Product) {
+fun ComponentPriceSection(product: Product) {
     val discountPrice = product.price * (1 - product.discountPercentage / 100)
 
     Row(
@@ -77,5 +77,5 @@ fun PriceSection(product: Product) {
 @Composable
 @Preview(showBackground = true)
 fun PreviewSectionPrice() {
-    PriceSection(dummyProducts().first())
+    ComponentPriceSection(dummyProducts().first())
 }

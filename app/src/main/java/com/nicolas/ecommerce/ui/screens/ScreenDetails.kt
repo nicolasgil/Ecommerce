@@ -46,13 +46,16 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import com.nicolas.ecommerce.R
 import com.nicolas.ecommerce.domain.models.Product
-import com.nicolas.ecommerce.utils.UnexpectedError
+import com.nicolas.ecommerce.ui.screens.components.ComponentImageSlider
+import com.nicolas.ecommerce.ui.screens.components.ComponentPriceSection
+import com.nicolas.ecommerce.ui.screens.components.ComponentRatingBar
+import com.nicolas.ecommerce.ui.screens.components.UnexpectedError
 import com.nicolas.ecommerce.utils.dummyNavController
 import com.nicolas.ecommerce.utils.dummyProducts
 import kotlinx.coroutines.delay
 
 @Composable
-fun DetailScreen(navController: NavHostController, product: Product?) {
+fun ScreenDetails(navController: NavHostController, product: Product?) {
     var isLoading by remember { mutableStateOf(true) }
 
     LaunchedEffect(product) {
@@ -116,7 +119,7 @@ fun DetailContent(product: Product, navController: NavHostController) {
                         .verticalScroll(rememberScrollState())
                         .padding(horizontal = 16.dp, vertical = 1.dp)
                 ) {
-                    ImageSlider(images = product.images)
+                    ComponentImageSlider(images = product.images)
 
                     Spacer(modifier = Modifier.height(8.dp))
 
@@ -147,7 +150,7 @@ fun DetailContent(product: Product, navController: NavHostController) {
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically
                     ) {
-                        RatingBar(rating = product.rating)
+                        ComponentRatingBar(rating = product.rating)
                         Text(
                             text = "Stock: ${product.stock}",
                             style = TextStyle(
@@ -159,7 +162,7 @@ fun DetailContent(product: Product, navController: NavHostController) {
 
                     Spacer(modifier = Modifier.height(8.dp))
 
-                    PriceSection(product = product)
+                    ComponentPriceSection(product = product)
 
                     Spacer(modifier = Modifier.height(8.dp))
 

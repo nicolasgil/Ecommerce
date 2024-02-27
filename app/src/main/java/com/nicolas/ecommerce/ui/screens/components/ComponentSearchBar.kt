@@ -1,4 +1,4 @@
-package com.nicolas.ecommerce.ui.screens
+package com.nicolas.ecommerce.ui.screens.components
 
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 import com.nicolas.ecommerce.R
 
 @Composable
-fun SearchBar(searchText: String, onSearchTextChange: (String) -> Unit) {
+fun ComponentSearchBar(searchText: String, onSearchTextChange: (String) -> Unit) {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -49,7 +49,7 @@ fun SearchBar(searchText: String, onSearchTextChange: (String) -> Unit) {
 @Preview(showBackground = true)
 @Composable
 fun SearchBarPreview() {
-    SearchBar(
+    ComponentSearchBar(
         searchText = stringResource(R.string.text_placeholder_bar_searchbar),
         onSearchTextChange = {})
 }

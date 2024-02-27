@@ -24,8 +24,6 @@ fun  dummyProducts(): List<Product> {
 
 @Composable
 fun  dummyNavController() = rememberNavController()
-@Composable
-fun  dummyViewModel() = hiltViewModel<LobbyViewModel>()
 
 @Composable
 fun  dummyCategories(): List<String> {

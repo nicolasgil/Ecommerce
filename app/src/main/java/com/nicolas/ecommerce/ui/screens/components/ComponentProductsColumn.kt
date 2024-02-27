@@ -1,4 +1,4 @@
-package com.nicolas.ecommerce.ui.screens
+package com.nicolas.ecommerce.ui.screens.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -13,12 +13,12 @@ import com.nicolas.ecommerce.utils.dummyNavController
 import com.nicolas.ecommerce.utils.dummyProducts
 
 @Composable
-fun ProductsColumn(products: List<Product>, navController: NavController) {
+fun ComponentProductsColumn(products: List<Product>, navController: NavController) {
     LazyColumn(
         modifier = Modifier.padding(10.dp)
     ) {
         items(products) { product ->
-            ProductCard(product = product, navController)
+            ComponentProductCard(product = product, navController)
         }
     }
 }
@@ -26,5 +26,5 @@ fun ProductsColumn(products: List<Product>, navController: NavController) {
 @Preview(showBackground = true)
 @Composable
 fun ProductsColumnPreview() {
-    ProductsColumn(products = dummyProducts(), dummyNavController())
+    ComponentProductsColumn(products = dummyProducts(), dummyNavController())
 }

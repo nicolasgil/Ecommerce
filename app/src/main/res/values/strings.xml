@@ -21,7 +21,7 @@
     //Categories
     <string name="text_description_icon_arrow_down_categories">ArrowDropDown</string>
 
-    //Elements Visuals
+    //Components Visuals
     <string name="text_list_products_empty_warning_elements_visuals">There are no products available.</string>
     <string name="text_button_retry_elements_visuals">Retry</string>
     <string name="text_button_accept_elements_visuals">Accept</string>
@@ -38,7 +38,8 @@
     <string name="text_title_appbar_product_details">Product Details</string>
     <string name="text_description_arrow_back_details">Back</string>
     <string name="text_title_rating">Rating:</string>
-    <string name="text_category_default_categories">ALL CATEGORIES</string>
+
+    //Filter
     <string name="text_description_icon_filter">Filter</string>
     <string name="text_button_apply_filter">Apply</string>
 </resources>
